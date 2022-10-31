@@ -1,0 +1,29 @@
+\documentclass[titlepage,12pt,openany]{book}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{calc}
+
+\usepackage{mathtools}
+\usepackage{enumitem}
+
+\parindent=3cm
+
+\newcommand{\enum}[1]{\begin{enumerate}[labelsep=0.3cm,labelwidth=\widthof{\ref{last-item}}, itemindent=0em,leftmargin=!, label=(\roman*)]#1 \end{enumerate}}
+\newcommand{\enuma}[1]{\begin{enumerate}[labelsep=0.3cm,labelindent=0pt,itemindent=0em,labelwidth=\widthof{\ref{last-item}}, label=(\alph*)]#1 \end{enumerate}}
+
+\title{My-Dagen}
+\author{Sebastian Miles}
+\date{}
+
+\begin{document}
+	\maketitle
+	\include{Vctor_Fingal}
+	\include{Viktor2}
+	\include{Anita}	
+	\include{christian}
+	\include{Lillemor}
+	\include{erik}
+	\include{adam}
+\end{document}
