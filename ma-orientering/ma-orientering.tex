@@ -1,0 +1,44 @@
+\documentclass[titlepage,12pt,openany]{book}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{calc}
+\usepackage{titlesec}
+
+\usepackage{mathtools}
+\usepackage{enumitem}
+
+\parindent=3cm
+
+\newcommand{\enum}[1]{\begin{enumerate}[labelsep=0.3cm,labelwidth=\widthof{\ref{last-item}}, itemindent=0em,leftmargin=!, label=(\roman*)]#1 \end{enumerate}}
+\newcommand{\enuma}[1]{\begin{enumerate}[labelsep=0.3cm,labelindent=0pt,itemindent=0em,labelwidth=\widthof{\ref{last-item}}, label=(\alph*)]#1 \end{enumerate}}
+
+\titleformat{\chapter}[block]
+{\normalfont\huge\bfseries}{\thechapter.}{1em}{\Huge}
+\titlespacing*{\chapter}{0pt}{-19pt}{0pt}
+
+\title{Ma orientering anteckningar}
+\author{Sebastian Miles}
+\date{}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	
+	\include{my-dagen/Vctor_Fingal}
+	\include{my-dagen/Viktor2}
+	\include{my-dagen/Anita}	
+	\include{my-dagen/christian}
+	\include{my-dagen/Lillemor}
+	\include{my-dagen/erik}
+	\include{my-dagen/adam}
+	\include{11-1/facksprak}
+	\include{11-2/julie}
+	\include{11-4/sammanfattning}
+	\include{talteori/talteoridel1}
+	\include{11-8/mathwar}
+	\include{godel/godel}
+	\include{marko/marko}
+	\include{google/google}
+\end{document}

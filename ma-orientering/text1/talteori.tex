@@ -1,0 +1,100 @@
+\subsection*{Tidiga Talteorin}
+Det tidigaste kända tecken av talteori är den Babyloniska lerplattan \textit{Plimpton 322} (ca 1800 f.kr.) som består av en lista av pythagoreiska tripplar, det är positiva heltal $a,b,c$ som uppfyller $a^2+b^2=c^2$. Man tror på grund av antalet tuplar att listan inte var skapad genom slumpmässigt testa tal, utan med någon slags tal-teoretisk metod \cite{plimpton322:collection}.\\\\
+Under den antika Grekland (ca 300 f.kr.) levde matematikern och logikern Euklides, han samlade upp det mesta av matematiken som fanns på den tiden och skrev systematiskt ner informationen i 13 böcker, dessa böcker är idag kända som \textit{Euklides Elements}. Böckerna innehåller postulat, propositioner och definitioner, det är ett matematiskt moget verk för dess tid. \cite{euclid:notgood}
+\subsection*{Euklides Algoritm}
+I \textit{Elements} VII presenterar Euklides en algoritm, som idag har fått namnet Euklides algoritm (EUA). I en föreläsning berättar Johan Jonasson vid Chalmers tekniska högskola om just Euklides algoritm. Han börjar först med en hjälpsats som kallas för divisionsalgoritmen:
+För varje talpar $a,b$ kan man finna en unik kvot $q$ samt en unik rest term $r$, 
+$$a=qb+r, \quad 0<r<b-1.$$
+Vidare för EUA, låt $\text{sgd}{(a,b)}$ beteckna den största gemensamma nämnaren för de positiva heltalen $a,b$. 
+Den kan då beräknas genom att successivt tillämpa divisionsalgoritmen enligt processen
+\begin{align*}
+	&a=q_1b+r_1,\quad 0<r_1\leq b-1\\
+	&b=q_2r_1+r_2,\quad 0<r_2\leq r_1-1\\
+	&r_1=q_3r_2+r_3,\quad 0<r_3\leq r_2-1\\
+	&\vdots\\
+	&r_{n-2}=q_nr_{n-1}+r_n,\quad 0<r_n\leq r_{n-1}-1\\
+	&r_{n-1}=q_{n+1}r_n.
+\end{align*}
+När resttermen är lika med noll, då är den största gemensamma nämnaren givet av $\text{sgd}{(a,b)}=r_n$ \cite{talteori1}, för ett bevis hänvisas sats 207 i \cite{hardy}.\\
+\iftrue
+\noindent
+Jonasson påstår att antal steg i EUA är logaritmisk, det kan visas att den avslutar inom $2\log_2{b}+1$ steg:
+\begin{align*}
+&\begin{cases}
+	r_{k-1}=q_{k+1}r_{k}+r_{k+1},\quad k>1\\
+	r_k=q_{k+2}r_{k+1}+r_{k+2}
+\end{cases}
+\implies r_{k-1}=q_{k+1}(q_{k+2}r_{k+1}+r_{k+2})+r_{k+1}\\
+&>q_{k+1}q_{k+2}r_{k+1}+r_{k+1}>2r_{k+1}
+\end{align*}
+Såldeles, har vi den rekursiva olikheten $r_k>2r_{k+2}$ för $k=0,1,\ldots,n$, där $r_0=b$. Låt sedan $i=\left\lfloor\frac{n}{2}\right\rfloor$, då gäller
+\begin{align*}
+	&b>2r_2>4r_4>\ldots>2^ir_{2i}\geq2^i\\
+	&\implies \log_2{b}>i\geq \frac{n}{2}
+\end{align*}
+Nu visar det sig att $2\log_2b$ är en övre gräns för $n$.\\
+\fi
+Han förklarar även hur man kan utföra EUA baklänges för att lösa den linjära diofantiska ekvationen $ax+bx=\text{sgd}{(a,b)}$.
+
+\subsection*{Euler $\phi(n)$-funktionen}
+I Jonassons nästa föreläsning om talteori definierar han Euler $\phi(n)$ funktionen som ger antalet positiva heltal mindre än $n$ som är relativt prima till $n$:
+$$\phi(n)=\left|\{0 < x < n \mid \text{sgd}{(x,n)=1}\}\right|.$$
+Han visar tre egenskaper som funktionen uppfyller:
+\enuma{
+	\item $p$ är primtal $\implies$ $\phi(p)=p-1$
+	\item $\text{sgd}{(a,b)}=1 \implies \phi(ab)=\phi(a)\phi(b)$
+	\item $p,q$ är primtal $\implies$ $\phi(pq)=(p-1)(q-1)\quad\quad\quad$ (Följer av (a) och (b))
+}
+Jonasson bevisar den s.k Eulers sats:\\
+Om $\text{sgd}{(a,n)}=1$ då gäller
+$$a^{\phi{(n)}}\equiv 1 \pmod{n}$$
+För bevis av ovan nämnda sats hänvisas sats 72 i \cite{hardy}.
+
+\subsection*{Kryptosystemet RSA}
+För att knyta ihop matematiken till en konkret tillämpning, introducerar Jonasson RSA (Rivest-Shamir-Adleman) kryptosystemet; detta används idag för att skicka krypterade meddelanden. Till exempel, Alice vill skicka ett meddelande till Bob sådan att
+\enum{
+	\item Ingen förutom Bob kan läsa det.
+	\item Bob ska veta att det var Alice som skickade det.
+	\item Eve ska inte kunna ändra meddelandet medan det skickas.
+}
+Detta är något som RSA kan uppnå. Jonasson förklarar att varje användare måste välja två stora skilda primtal $p,q$ och ett naturligt tal $a$ sådana att
+\begin{align*}
+	&\text{sgd}{(a,\phi{(pq)})}=1\\
+	\iff &\text{sgd}{(a,(p-1)(q-1))}=1\quad\quad\text{(egenskap (c))}
+\end{align*}
+Talen $p,q$ måste hållas hemligt, dock behöver inte $pq$ och $a$ vara hemliga eftersom primtals faktorisering är väldigt långsamt, sådan att ingen kan beräkna $p,q$ samt $\phi{(pq)}$ noterar Jonasson. Låt $b$ vara den multiplikativa inversen av $a$ modulo $\phi{(pq)}$, för att hitta $b$ kan EUA utföras baklänges, detta går snabbt ty det är logaritmisk antal steg.\\\\
+Antag att Alice vill skicka ett meddelande $x$ till Bob. Om $x$ är ett positivt heltal mindre än $p,q,a$ och $b$ ska Alice skicka
+$$y\equiv x^a \mod pq$$
+och Bob beräknar
+$$z\equiv y^b \mod{pq}$$
+Jonasson motiverar att eftersom $b$ är invers till $a \mod{pq}$ kan man skriva
+$$ab=1+t\phi{(pq)}$$
+för något heltal $t$. Det följer att
+$$z\equiv y^b \equiv x^{ab}= x^{1+t\phi{(pq)}} \pmod{pq}$$
+och av Eulers sats fås
+$$x\equiv x^{1+t\phi{(pq)}} \pmod{pq}.$$
+Alltså har Bob beräknat det originella meddelandet $x$ som Alice skickade. Jonasson berättar även om modifieringar som att kryptera två gånger eller använda en hash funktion för att säkerställa att Eve inte har ändrat meddelandet och att det var Alice som var avsändaren \cite{talteori2}.
+\subsection*{Modern Talteori}
+\iftrue
+%// hur primtalen är distributerade, sedan reimann hypo av Martin Hallnäs
+Modern talteori syftar på talteori som använder matematik från andra branscher för att formulera satser eller bevis. Algebra kan användas i samband med talteori, i Jonassons första föreläsning visar han den cykliska gruppen $\mathbb{Z}_n=\{[0],[1],\ldots,[n-1]\}$, där notationen $[k]$ betyder alla $j$ sådan att $k\equiv j \pmod n$ och följer med några satser om gruppen.
+\\\\
+Christian Johansson, en matematiker och lektor vid Göteborgs Universitet och Chalmers tekniska högskola talade under My-dagen om vad en matematiker gör och hur matematisk forskning går till. Johansson studerar modern talteori med algebraiska strukturer, särskilt Langlands teorin som är ett tillhör algebraisk talteori. Han säger att Galoisteori ligger centralt, vilket är en teori som kan användas för att visa det finns polynom av minst grad 5 som inte har en exakt lösning \cite{johansson}.
+\\\\
+En sats inom analytisk talteori som har fått namnet Primtalssatsen, den påstår att primtalsräknar-funktionen $\pi(x)= \text{\# primtal} \leq x$, som räknar antalet primtal upp till $x$, uppfyller $$\lim_{x\to \infty}\pi(x) \cdot \frac{\ln x}{x}=1.$$
+Denna sats var först bevisad 1896 genom att använda metoder från komplex analys. Året 1921 skrev G.H Hardy ett brev där han tror att ett bevis som inte är beroende av teorin om funktioner är extraordinärt osannolikt. Trots detta bevisade Paul Erdős och Atle Selberg år 1948 satsen utan komplex analys \cite{Goldfeld2004, numbertheory:analytic}. Det visar att talteori är inte nödvändigtvis beroende av andra grenar inom matematiken, men har ett stort inflytande. Andra grenar inom matematiken kan även användas för att formulera satser, i detta exempel användes ett gränsvärde från analysen.
+\fi
+\\\\
+I en föreläsning av Martin Hallnäs pratar han om Gamma funktionen $\Gamma(x)$\textemdash en generalisering av fakultet operatorn för hela $\mathbb{C}$ förutom negativa heltalen. Han berättar om en tillämpning av Gammafunktionen med Riemann zeta-funktionen
+$$\zeta(s)=\sum_{n=1}^\infty\frac{1}{n^s}, \quad \mathfrak{Re}(s)>1.$$
+Riemannhypotesen handlar om riemann zeta-funktionens nollställen, det är en av de viktigaste olösta problemen inom matematiken, där en lösning uppger en miljon dollar som pris av Clay Institute. Liknande primtalssatsen har Riemannhypotesen en central betydelse för hur primtalen är fördelade.
+Hallnäs beskriver bland annat för $\mathfrak{Re}(s)>1$ håller identiteten
+$$\zeta(s)\Gamma(s)=\int_0^\infty\frac{t^{s-1}}{e^t-1}dt,$$
+han nämner även den s.k reflektionsformeln
+$$\frac{\zeta(s)}{\zeta(1-s)}=2^s \pi^{s-1}\sin{\left(\frac{\pi s}{2}\right)}\Gamma(1-s)$$
+som håller för nästan hela $\mathbb{C}$, 
+detta för främja kopplingen mellan analysen och talteorin \cite{hallnas}.
+
+
+%// Erdös number in "Google sökmotor- linjär algebra"?
+

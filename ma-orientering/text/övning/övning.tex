@@ -1,0 +1,26 @@
+\documentclass[titlepage,12pt,openany]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{calc}
+
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{setspace}
+
+\usepackage[margin=2cm]{geometry}
+
+\parindent=3cm
+\setstretch{1.5}
+
+\newcommand{\enum}[1]{\begin{enumerate}[labelsep=0.3cm,labelwidth=\widthof{\ref{last-item}}, itemindent=0em,leftmargin=!, label=(\roman*)]#1 \end{enumerate}}
+\newcommand{\enuma}[1]{\begin{enumerate}[labelsep=0.3cm,labelindent=0pt,itemindent=0em,labelwidth=\widthof{\ref{last-item}}, label=(\alph*)]#1 \end{enumerate}}
+
+\title{Can Maths Combat Terrorism?}
+\author{Sebastian Miles}
+
+
+\begin{document}
+	\include{inledning}
+\end{document}

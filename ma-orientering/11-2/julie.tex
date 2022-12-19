@@ -1,0 +1,36 @@
+\chapter{Julie Rowlett}
+\section{Game of teams}
+\textbf{Part 1: Work wih CJ Karlsson \& M Nursultanov}\\\\
+\textbf{Definition 1.} A \textit{team} is a collection of players.\\\\
+Each players of each team is randomly paired to compete.\\
+Players are assigned a positive integer CA (competitive abilities). higher wins, lower loses, same is tie.\\\\
+\textbf{Definition 2.} A \textit{strategy} is a rule/method/recipe for assigning CAs to your team.
+If a team has n players then a strategy S is a function from $\mathbb{N}$ to $[0,\infty)$ such that $\sum_{j\in \mathbb{Z}}S(j)$, $S(j)=\text{\# players that have } CA=j$.\\
+\noindent\\
+\textbf{Constraint 1.} Each strategy assigns only a finite$_S$ \# of CAs.
+Each strategy has some $M_S\in \mathbb{N}$ such that $S(j)=0 \forall j > M_s$. \\
+\\
+\textbf{Constraint 2.} Mean competitive ability (MCA) constraint fix $c>0$ and require all strategies to satisfy 
+$$MCA(S):=\frac{\sum_{j\geq 0}S(j)j}{\sum_{j\geq 0}S(j)}\leq C$$
+\\
+\textbf{Team payoffs:} For team A vs B the payoff to A is $$E[A;B]=\sum_{j\in \mathbb{N}}A(j)(\sum_{i<j}B(i)-\sum_{k>j}B(k))$$
+\\
+\textbf{Question:} Does there exist a strategy such that $$E[S;T]\geq 0, \forall T$$\\\\
+\textbf{Theorem 1} $(CJK,MN,JR)$ Assume $C=n+\frac{1}{2}$, for some $n\in \mathbb{N}$ Then the winning strategies are those with 
+\[W(j)=\begin{cases}
+	\frac{w}{2n+2}, \quad 0\leq j \leq 2n+1,\\
+	0, \quad otherwise
+\end{cases}
+\]
+$W(j)$ is the CA value of player $j$.
+\\
+\textbf{Theorem 2.} Assume $C=n \in \mathbb{N}$, $n\geq 1$. Then winning strategies are precisely those that are of  the form 
+\[W(j)=\begin{cases}
+	\frac{wa}{(n+1)a+nb}, \quad 0\leq j \text{ odd} \leq 2n,\\
+	\frac{wb}{(n+1)a+nb}, \quad 0\leq j \text{ even} \leq 2n,\\
+	0, \quad otherwise
+\end{cases}
+\]
+for constants $a,b,w\geq 0$ with $w(a+b)>0$.\\\\
+If C is \textit{not} $\in \mathbb{N}$, $\mathbb{N}+\frac{1}{2}$, is \textit{an open problem.}
+

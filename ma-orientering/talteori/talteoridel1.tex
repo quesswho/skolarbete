@@ -1,0 +1,51 @@
+\chapter{Talteori del 1}
+
+Under hela detta kapitelt är varje tal ett heltal.\\
+Man säger att $a$ delar $b$ och skriver $a\mid b$ om det finns ett $n$ sådan att $an=b$.\\
+\textbf{Sats 1.} $a\mid b$ och $a \mid c$ om och endast om $a\mid mb+nc$ för alla $m$ och $n$.\\
+\textit{Bevis.}\\
+$\Leftarrow$: tag$m=0$, $n=1$ respektive $m=1, n=0$.\\
+$\Rightarrow$: Att $a\mid b$ och $a\mid c$ betyder att det finns heltal $p$ och $q$ sådana att $b=pa$ och $c=qa$. Detta ger $mb+nc=(mp+nq)a$.\\
+\textbf{Sats 2.} Om $a\mid b$ och $a,b>0$ gäller att $a\leq b$\\\\
+\textbf{Def 1.} Den största gemensamma delaren till $a$ och $b$ ges av $$\gcd(a,b)=\max\{d: d\mid a \text{ och } d\mid b\}$$.\\
+\textbf{Sats 4.} $\gcd(a,b)=\gcd(a+nb,b)$ för alla $b$.\\
+\textit{Bevis.}\\
+Låt $d=\gcd(a,b)$ och $d'=\gcd(a+nb,b)$. Eftersom $d\mid a$ och $d\mid b$ gäller $d\mid a+nb$ enligt sats 1. Alltså delar $d$ både $b$ och $a+nb$, så $d\leq d'$.\\Å andra sidan medför $d'\mid a+nb$ och $d'\mid b$ att $d'\mid(a+nb)-nb$, dvs $d'\mid a$. Alltså $d'\leq d$.\\\\
+Euklides algoritm terminerar med högst $\log_2{b}$ iterationer.\\\\
+Om man kör Euklides algoritm baklänges får man \textit{Euklides utökade algoritm}, där man finner två heltal $u$ och $v$ så att $au+bv=\gcd(a,b)$. Att göra det baklänges är egentligen bakåt substitution.\\\\
+\textbf{Aritmetikens fundamentalsats:} För alla heltal $a\geq 2$ gäller att $a$ kan skrivas som en produkt av primtal. Detta kan göras på endast ett sätt, bortsett från ordningen på faktorerna.\\
+\textit{Bevis.}\\
+Bevis följer av ett stark induktions bevis. Påståendet är sant för $a=2$. Tag ett $a>2$ och antag att alla $b=2,3,\ldots,a-1$ kan skrivas som produkter av primtal. Nu är $a$ antingen ett primtal, i vilket fall $a$ är sin egen produkt av primtal, eller så kan man skriva $a=a_1a_2$ för två tal $2\leq a_1,a_2\leq a/2$. Enligt antagande kan båda dessa skrivas som produkter av primtal, vilket då gäller även för $a$. Nu följer påståendet av induktionsprincipen.\\\\
+\textbf{Sats 5.} Om $a$ och $b$ är relativt prima och $a \mid bc$ gäller att $a\mid c$.\\
+\textit{Bevis.} Enligt euklides baklänges algo kan man finna $u$ och $v$ så att $au+bv=1$ vilket medför att $$acu+bcv=c$$
+Att $a\mid acu$ är självklart och att $a \mid bcv$ följer av att $a\mid bc$. Därför gäller att $a\mid acu + bcv$, dvs $a\mid c$.
+\\\\
+\textbf{Sats 6.} Om $p$ är ett primtal och $p\mid ab$ så måste $p\mid a$ eller $p\mid b$.\\\\
+\textit{Bevis.} Om $p$ inte delar $a$ gäller $\gcd(a,p) =1$, så $p\mid b$ enligt Sats 5. Om $p$ inte delar $b$ är det analogt..
+\\\\
+\textbf{Sats 7.} Om $p$ är ett primtal och $p\mid a_1a_2\cdots a_k$ gäller att $p\mid a_i$ för minst ett $i$.
+\\\\
+\textbf{Sats 8.} Om $p$ är ett primtal, $q_1,q_2,\ldots,q_k$ är primtal och $p\mid q_1q_2\ldots1_k$, gäller att $p=q_i$ för minst ett $i$.\\\\
+
+
+\section{Modulär aritmetik}
+\textbf{Def 2.} Man säger att $a$ är kongruent med $b$ modulo $n$, skrivet
+ $$a\equiv b \mod n$$
+ om $n\mid a-b$.
+\\\\
+Notera att $a\equiv b \mod n$ är en ekvivalensrelation, ty $a\equiv a$, $a\equiv b \implies b\equiv a$, och $a\equiv b$, $b\equiv c \implies a\equiv c$. Skriv 
+$$[k]=[k]_n=\{j:j\equiv k \mod n\}$$
+för ekvivalnsklassen som innehåller k.\\\\
+\textbf{Def 3.} Heltalen modulo $n$ get av $\mathbb{Z}_n=\{[0],[1],\ldots,[n-1]\}$.
+$\mathbb{Z}_n$ kallas också för den cykliska gruppen av modulo n\\\\
+\textbf{Sats 9.} Om $a\equiv c$ och $b\equiv d$ modulo n gäller att
+\enum{
+\item $a+b\equiv c+d \mod n$
+\item $ab\equiv cd \mod n$
+}
+\textit{Bevis av andra delen.} Per defintion finns det heltal $s$ och $t$ så att $c-a=sn$ och $d-b=tn$. Detta ger:
+$$cd-ab=cd-ad+ad-ab=d(c-a)+a(d-b)=dsn+atn=(ds+at)n$$
+$\square$
+\\\\
+\textbf{Def 4.} Ett tal $b\in \mathbb{Z}_n$ sägs ha en multiplikativ invers om det finns ett element $c\in \mathbb{Z}_n$ sådan att $bc\equiv 1\mod n$. \\\\
+Vilket är $bc+nk=1$ för något heltal $k$. För $\gcd(b,n)=1$ finns en lösning enligt EUA.

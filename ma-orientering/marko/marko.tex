@@ -1,0 +1,43 @@
+\chapter{Markov kedjor}
+\textbf{Markovkedja:} En glömsk groda hoppar mellan näckrosblad.
+$$X_0,X_1,X_2,\ldots$$
+Där $X_t$ är tillståndet.
+Låt $X_t\in S$. S innehåller alla olika tillstånd.
+Nästa steg är helt oberoende på hur man kom till tillståndet, den är endast beroende på vart man är.\\
+Antag att $X_0$ väljs slumpmässigt så att $\mathbb{P}(X_0=s)=p_0(s), s\in \{A,B,C\}$\\
+$$p_1(A)=\mathbb{P}(X_1=A)=0.3p_0(A)+0.2p_0(B)+0.2p_0(C)$$
+Kan vi bestämma $p_0(s)$ så att $p_1(s)=p_0(s)$ för $s\in \{A,B,C\}$
+Javisst, byt bara ut $p_1(s)$ mot $p_0(s)$ i ekvationssystemet och lös. Man får då
+$$p_0(A)\approx0.222, p_0(B)\approx0.494, p(C)\approx 0.284$$\\
+
+Om man väljer $p_0(s)$ enligt de siffrorna kommer det att gälla att $p_t(s)=p_0(s)$ för alla $t$ och $s$ (tack vare tidshomogenitet). Om man inte väljer $p_0(s)$ så gäller ändå att $\mathbb{(X_t=s)}$ konvergerar mot dessa tal (dvs 0.222, 0.494 respektive 0.284). Man brukar skriva
+$$\pi(s)=\lim\limits_{t\to \infty}p_t(s)=\lim\limits_{t\to \infty}\mathbb{P}(X_t=s)$$.
+
+Generellt: antag att S innehåller n element och kalla dessa $1,2,\ldots,n$. Skriv $$p_t=[p_t(1),p_t(2),\ldots,p_t(n)].$$
+Låt $P=[p_{ij}]$, där $$p_{ij}=\mathbb{P}(x_1=j\mid X_0=i).$$
+Då gäller $$P_{t+1}=p_tP.$$
+Förutom i speciella fall gäller att det finns en vektor
+$\pi=[\pi(1),\ldots,\pi(n)]$ Sådan att$$\lim\limits_{t\in \infty}\mathbb{P}(X_t=s)=\pi(s),$$
+för alla $s$, oavsett hur man startar. Vektorn $\pi$ ges då av motsvvarigheten till ekvationssystemet ovan:
+$$\pi P=\pi\quad\text{ (matris multiplikation)}$$\\
+Kortblandningar: En kortlek med n kort blandas. $S=\text{mängden av alla }n!$ permutationer av de n korten. Uppenbarligen en Markovkedja; ordningen efter nästa steg i blandningen beror bara på av hur korten ligger nu.\\\\
+Om omordningen som sker av kortleken i ett blandingssteg inte beror av hur korten ligger nu, så får man alltid $$\pi(s)=\frac{1}{n!}.$$\\
+Primitiv rot i en cyklisk grupp.\\\\
+En kortlek är välblandad när $\mathbb{P}(x_t=s)\approx\pi(s)$ för (nästan) alla s. Vad betyder det?\\\\
+\textbf{Definition} Totalvariansavståndet mellan fördelningen för $X_t$ och $\pi$ ges av $$d(X_t,\pi)=\max_{U\subset S}\mid \mathbb{P}(X_t \in U)-\pi(U)\mid=\frac{1}{2}\sum_{s\in S}\mid\mathbb{P}(X_t=s)-\pi(s)\mid.$$\\\\
+$d(X_t,\pi)<1$ och $d(X_0,\pi)$ är väldigt nära 1 om $X_0$ är en fix startordning. Man brukar beståmma ett $\varepsilon>0$ och vara nöjd när $t$ är så stort att $d(X_t,\pi)<\varepsilon$.\\
+Hur stort t som behövs brukar man uttrycka i termer av n, dvs hur många kort som finns ileken. Oftast vill man ha en övre skattning på hur stort t behöver vara.\\
+Lektorn pratar om Markov Chain Monte Carlo (MCMC).\\\\
+Koppling: Låt $Y_0,Y_1,\ldots$ vara en annan kortlek som blandas på samma sätt som X-leken, med skillnad att den är stationär redan från början: $\mathbb{P}(Y_0=s)=\frac{1}{n!}$ för alla s. Konstruera ett beroende mellan blandningarna för X-leken och Y-leken. Beroendet måste vara sådant att lekarna var för sig uppfyller den blandingsteknik som vi vill studera. Vi kräver också att $X_t=y_t \implies X_{t'}=Y_{t'}$ för alla $t'>t$\\
+Låt $\tau=\min\{t:X_t=Y_t\}$. Då gäller
+\begin{align*}
+	d(X_t,\pi)&=d(X_t,Y_t)=\max_{U}\mid \mathbb{P}(X_t \in U)-\mathbb{P}(Y_t\in U)\mid\\
+	&=\max_{U}\mid \mathbb{P}(X_t \in U,\tau \leq t)-\mathbb{P}(Y_t\in U, \tau \leq t)\\
+	&+\mathbb{P}(X_t \in U,\tau > t)-\mathbb{P}(Y_t\in U, \tau > t)\mid \\
+	&\leq \mathbb{P}(\tau > t)
+\end{align*}\\\\
+$$\sum_{i=0}^{n-1}T_i \approx n\sum_{i=1}^{n}\frac{1}{i}\approx n \ln{n}.$$
+Man kan visa att för $\delta >0$ gäller
+$$\lim_{n\in \infty}\mathbb{P}((1-\delta)n\ln{n}<\tau < (1+\delta)n \ln{n})=1.$$
+Detta är samma som idolbildsproblemet. Man får köpa $n ln n$ idolbilder innan man fått alla.\\\\
+The Riffle Shuffle: Tar en kort lek och delar de i två delar.
